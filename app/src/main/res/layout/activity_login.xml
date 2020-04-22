@@ -57,8 +57,7 @@
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="text"
-                >
+                android:inputType="text">
 
             </com.google.android.material.textfield.TextInputEditText>
         </com.google.android.material.textfield.TextInputLayout>
@@ -99,6 +98,7 @@
             android:layout_marginBottom="5dp"
             android:background="#000"
             android:text="Submit"
+            android:onClick="LoginUser"
             android:textColor="#fff"></Button>
 
         <Button
@@ -108,6 +108,7 @@
             android:layout_margin="5dp"
             android:background="#00000000"
             android:elevation="0dp"
+            android:onClick="Signup"
             android:text="New user? SIGN UP"></Button>
 
     </LinearLayout>

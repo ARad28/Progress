@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Toast;
 
 import com.google.android.material.textfield.TextInputEditText;
@@ -17,36 +18,136 @@ import com.google.firebase.database.FirebaseDatabase;
 
 public class SignUpActivity extends AppCompatActivity
 {
-    TextInputLayout Name,Email,PhoneNumber,Password,Username;
-
+    EditText Name,Email,PhoneNumber,Password,Username;
     Button callLogInButton,SubmitButton;
     FirebaseDatabase rootnode;
     DatabaseReference reference;
 
-    public void go(View view)
+    public void Register(View view)
     {
         rootnode=FirebaseDatabase.getInstance();
-        reference=rootnode.getReference("users");
+        reference=rootnode.getReference("Users");
 
-        //ass soon as you accept values in the emulator the app crashes
-        //fuck firebase for now just try to print it in the log
-        //bas text leke print karva de
-        String vname=Name.getEditText().getText().toString();
-        String vemail=Email.getEditText().getText().toString();
-        String vphonenumber=PhoneNumber.getEditText().getText().toString();
-        String vusername=Username.getEditText().getText().toString();
-        String vpassword=Password.getEditText().getText().toString();
+        if(!validateName() |!validatePassword() | !validatePhoneNo() | !validateEmail() | !validateUsername())
+        {
+            return;
+        }
+
+        String vname=Name.getText().toString();
+        String vemail=Email.getText().toString();
+        String vphonenumber=PhoneNumber.getText().toString();
+        String vusername=Username.getText().toString();
+        String vpassword=Password.getText().toString();
         Log.i("name",""+vname);
         Log.i("email",""+vemail);
         Log.i("ph",""+vphonenumber);
         Log.i("username",""+vusername);
         Log.i("pass",""+vpassword);
-
         //get all the values
-        //Helperclass obj=new Helperclass(vname,vusername,vemail,vpassword,vphonenumber);
-        //reference.setValue(obj);
-        //reference.setValue("lolol");
+        Helperclass obj=new Helperclass(vname,vusername,vemail,vpassword,vphonenumber);
+        reference.child(vusername).setValue(obj);
     }
+
+    public boolean validateName()
+    {
+    String value=Name.getText().toString();
+    if(value.isEmpty())
+    {
+        Name.setError("Field cannot be Empty");
+        return false;
+    }
+    else
+    {
+        Name.setError(null);
+        return true;
+    }
+}
+
+    public boolean validateEmail()
+    {
+        String emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
+        String value=Email.getText().toString();
+        if(value.isEmpty())
+        {
+            Email.setError("Field cannot be Empty");
+            return false;
+        }
+        else if (!value.matches(emailPattern))
+        {
+            Email.setError("Invalid Email");
+            return false;
+        }
+        else
+        {
+            Email.setError(null);
+            return true;
+        }
+}
+
+    public boolean validatePhoneNo()
+    {
+        String value=PhoneNumber.getText().toString();
+        if(value.isEmpty())
+        {
+            PhoneNumber.setError("Field cannot be Empty");
+            return false;
+        }
+        else
+        {
+            PhoneNumber.setError(null);
+            return true;
+        }
+    }
+
+    public boolean validateUsername()
+    {
+        String value=Username.getText().toString();
+        if(value.isEmpty())
+        {
+            Username.setError("Field cannot be Empty");
+            return false;
+        }
+        else if(value.length()>15)
+        {
+            Username.setError("Username too long");
+            return false;
+        }
+        else
+        {
+            Username.setError(null);
+            return true;
+        }
+    }
+
+    public boolean validatePassword()
+    {
+        String value=Password.getText().toString();
+        String passwordVal = "^" +
+                //"(?=.*[0-9])" +         //at least 1 digit
+                //"(?=.*[a-z])" +         //at least 1 lower case letter
+                //"(?=.*[A-Z])" +         //at least 1 upper case letter
+                "(?=.*[a-zA-Z])" +      //any letter
+                "(?=.*[@#$%^&+=])" +    //at least 1 special character
+                "(?=\\S+$)" +           //no white spaces
+                ".{4,}" +               //at least 4 characters
+                "$";
+        if(value.isEmpty())
+        {
+            Password.setError("Field cannot be Empty");
+            return false;
+        }
+        else if(!value.matches(passwordVal))
+        {
+            Password.setError("Password too weak");
+            return false;
+        }
+        else
+        {
+            Password.setError(null);
+            return true;
+        }
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -56,10 +157,11 @@ public class SignUpActivity extends AppCompatActivity
         //hooks
         callLogInButton=findViewById(R.id.callLogInButton);
         SubmitButton=findViewById(R.id.submitButton);
-        Name=findViewById(R.id.NameEditText);
-        Email=findViewById(R.id.emailEditText);
-        PhoneNumber=findViewById(R.id.phoneNumberEditText);
-        Password=findViewById(R.id.phoneNumberEditText);
+        Name=findViewById(R.id.name);
+        Email=findViewById(R.id.email);
+        PhoneNumber=findViewById(R.id.phoneNumber);
+        Password=findViewById(R.id.password);
+        Username=findViewById(R.id.username);
 
 
     }
