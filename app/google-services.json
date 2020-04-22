@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "1023310759856",
+    "firebase_url": "https://progress-5ba22.firebaseio.com",
+    "project_id": "progress-5ba22",
+    "storage_bucket": "progress-5ba22.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1023310759856:android:81b4dc7a4212f44ce8f875",
+        "android_client_info": {
+          "package_name": "com.example.progress"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1023310759856-peilft6t03mkih39iti5o6v77qpikk2m.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.progress",
+            "certificate_hash": "904f62dde8b2bda9dc26332810107ec86ead6cfc"
+          }
+        },
+        {
+          "client_id": "1023310759856-gks6bmg8k3f3pmds5a1fi1fphc1v360n.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDJpPFlFH9JzoAqeGjJ3bJ49A-cPiDSed8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1023310759856-gks6bmg8k3f3pmds5a1fi1fphc1v360n.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
